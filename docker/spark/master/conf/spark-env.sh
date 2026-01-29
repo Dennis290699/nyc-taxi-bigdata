@@ -1,0 +1,2 @@
+export SPARK_MASTER_HOST=spark-master
+export SPARK_WORKLOAD=master

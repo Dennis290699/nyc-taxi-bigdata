@@ -1,0 +1,12 @@
+# Ignorar carpetas de otros compañeros para este PR
+api/
+fronted/
+scripts/
+spark-jobs/
+Latex/
+docs/
+
+# Ignorar archivos temporales y de sistema
+node_modules/
+.DS_Store
+*.log
