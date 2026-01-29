@@ -1,0 +1,188 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Light Mode - Deep Blue Inspired by Observability Dashboard */
+  --background: oklch(0.99 0.002 264);
+  --foreground: oklch(0.15 0.02 264);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.15 0.02 264);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0.02 264);
+
+  /* Primary: Blue accent for data visualization */
+  --primary: oklch(0.55 0.2 264);
+  --primary-foreground: oklch(0.99 0 0);
+
+  /* Secondary: Teal accent */
+  --secondary: oklch(0.92 0.01 264);
+  --secondary-foreground: oklch(0.2 0.02 264);
+
+  --muted: oklch(0.95 0.01 264);
+  --muted-foreground: oklch(0.5 0.01 264);
+
+  /* Accent: Orange for highlights */
+  --accent: oklch(0.68 0.18 45);
+  --accent-foreground: oklch(0.99 0 0);
+
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  --border: oklch(0.9 0.01 264);
+  --input: oklch(0.9 0.01 264);
+  --ring: oklch(0.55 0.2 264);
+
+  /* Chart Colors - Professional Data Viz Palette optimized for light backgrounds */
+  --chart-1: oklch(0.5 0.22 264); /* Deep Blue */
+  --chart-2: oklch(0.62 0.2 35); /* Warm Orange */
+  --chart-3: oklch(0.55 0.18 195); /* Vibrant Cyan */
+  --chart-4: oklch(0.6 0.15 340); /* Soft Pink */
+  --chart-5: oklch(0.58 0.18 150); /* Fresh Green */
+
+  --radius: 0.5rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  /* Dark Mode - Enhanced Contrast for Cards */
+  --background: oklch(0.08 0.01 264);
+  --foreground: oklch(0.98 0.002 264);
+  --card: oklch(0.14 0.015 264);
+  --card-foreground: oklch(0.98 0.002 264);
+  --popover: oklch(0.14 0.015 264);
+  --popover-foreground: oklch(0.98 0.002 264);
+
+  /* Primary: Bright Blue for dark mode with better visibility */
+  --primary: oklch(0.62 0.24 264);
+  --primary-foreground: oklch(0.09 0.01 264);
+
+  --secondary: oklch(0.18 0.02 264);
+  --secondary-foreground: oklch(0.98 0.002 264);
+
+  --muted: oklch(0.18 0.02 264);
+  --muted-foreground: oklch(0.65 0.01 264);
+
+  /* Accent: Vibrant Orange for dark mode */
+  --accent: oklch(0.7 0.22 40);
+  --accent-foreground: oklch(0.09 0.01 264);
+
+  --destructive: oklch(0.62 0.27 27);
+  --destructive-foreground: oklch(0.98 0 0);
+
+  --border: oklch(0.25 0.02 264); /* Increased contrast border */
+  --input: oklch(0.2 0.015 264);
+  --ring: oklch(0.62 0.24 264);
+
+  /* Chart Colors optimized for dark backgrounds with high contrast and visibility */
+  --chart-1: oklch(0.68 0.24 264); /* Bright Blue - improved visibility */
+  --chart-2: oklch(0.72 0.22 40); /* Vibrant Orange - better contrast */
+  --chart-3: oklch(0.7 0.2 195); /* Electric Cyan - enhanced brightness */
+  --chart-4: oklch(0.72 0.18 340); /* Bright Pink - increased luminance */
+  --chart-5: oklch(0.7 0.2 150); /* Vivid Green - improved saturation */
+
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
+}
+
+@theme inline {
+  /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-muted/30;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/30 rounded-lg;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/50;
+  }
+}
+
+/* Animation utilities */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite linear;
+  background: linear-gradient(to right, transparent 0%, oklch(var(--muted) / 0.5) 50%, transparent 100%);
+  background-size: 1000px 100%;
+}
