@@ -1,0 +1,84 @@
+version: '3.8'
+
+services:
+  # Hadoop NameNode
+  hadoop-namenode:
+    build: ./docker/hadoop/namenode
+    container_name: hadoop-namenode
+    ports:
+      - "9870:9870"
+    volumes:
+      - hadoop_namenode:/opt/hadoop/data/namenode
+    environment:
+      - CLUSTER_NAME=cluster1
+    networks:
+      - bigdata-net
+
+  # Hadoop DataNode
+  hadoop-datanode:
+    build: ./docker/hadoop/datanode
+    container_name: hadoop-datanode
+    depends_on:
+      - hadoop-namenode
+    volumes:
+      - hadoop_datanode:/opt/hadoop/data/datanode
+    environment:
+      - SERVICE_URL=hadoop-namenode:8020
+      - CORE_CONF_fs_defaultFS=hdfs://hadoop-namenode:8020
+    networks:
+      - bigdata-net
+
+  # Spark Master
+  spark-master:
+    build: ./docker/spark/master
+    container_name: spark-master
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./spark-jobs:/opt/spark-apps
+      - ./data:/opt/data
+    environment:
+      - INIT_DAEMON_STEP=setup_spark
+    networks:
+      - bigdata-net
+
+  # Spark Worker
+  spark-worker:
+    build: ./docker/spark/worker
+    container_name: spark-worker
+    depends_on:
+      - spark-master
+    volumes:
+      - ./spark-jobs:/opt/spark-apps
+      - ./data:/opt/data
+    environment:
+      - SPARK_WORKER_CORES=2
+      - SPARK_WORKER_MEMORY=2g
+    networks:
+      - bigdata-net
+
+  # API Node.js
+  taxi-api:
+    build:
+      context: .
+      dockerfile: ./docker/node-api/Dockerfile
+    container_name: taxi-api
+    ports:
+      - "3000:3000"
+    depends_on:
+      - hadoop-namenode
+      - spark-master
+    volumes:
+      - ./api:/app
+      - /app/node_modules
+    networks:
+      - bigdata-net
+
+volumes:
+  hadoop_namenode:
+  hadoop_datanode:
+
+
+networks:
+  bigdata-net:
+    driver: bridge
